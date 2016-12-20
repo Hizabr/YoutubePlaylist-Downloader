@@ -30,14 +30,15 @@ open class MiscFuncs{
     
     //shuffle int array
     open class func shuffle<C: MutableCollection>(_ list: inout C) where C.Index == Int {
-        let c = list.count as! Int
-        for i in 0..<(c - 1) {
-            let j = Int(arc4random_uniform(UInt32(c - i))) + i
-            if (i != j){
-                swap(&list[i], &list[j])
+        if let c = list.count as? Int, c > 0
+        {
+            for i in 0..<(c - 1) {
+                let j = Int(arc4random_uniform(UInt32(c - i))) + i
+                if (i != j){
+                    swap(&list[i], &list[j])
+                }
             }
         }
-        
     }
     
     //delay execution, taken from : http://stackoverflow.com/questions/24034544/dispatch-after-gcd-in-swift
